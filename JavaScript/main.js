@@ -138,11 +138,10 @@ document.addEventListener("mousemove", (e) => {
 
 //*********************************************************************//
 //*********************************************************************//
-// # RENDERIZACION DE PROYECTOS - card y modal
+// # RENDERIZACION DE PROYECTOS - SOLO CARDS (modal único en galeria.js)
 
 const container = document.getElementById("projects-container");
 const cardTemplate = document.getElementById("project-template");
-const modalTemplate = document.getElementById("modal-template");
 
 proyectos.forEach((p) => {
   // ---------------------------
@@ -176,56 +175,6 @@ proyectos.forEach((p) => {
   btnModal.dataset.id = p.id;
 
   container.appendChild(card);
-
-  // ---------------------------
-  // MODAL
-  // ---------------------------
-  const modalFrag = modalTemplate.content.cloneNode(true);
-  const modal = modalFrag.querySelector(".project-modal");
-
-  modal.id = p.id;
-
-  modal.querySelector(".modal-title").textContent = p.titulo;
-
-  // textos
-  modal.querySelector(".modal-text").innerHTML = p.modalTexto;
-
-  // tech list
-  const techList = modal.querySelector(".tech-list");
-  techList.innerHTML = "";
-  p.techList.forEach((t) => {
-    techList.innerHTML += `<li>${t}</li>`;
-  });
-
-  // methods list
-  const methods = modal.querySelector(".methods-list");
-  methods.innerHTML = "";
-  p.methodsList.forEach((m) => {
-    methods.innerHTML += `<li>${m}</li>`;
-  });
-
-  // links repos
-  const linksContainer = modal.querySelector(".modal-links");
-
-  p.repos.forEach((r) => {
-    linksContainer.innerHTML += `
-            <a class="btn-glow" href="${r.link}" target="_blank">${r.label}</a>
-        `;
-  });
-
-  // descarga
-  const modalDl = modal.querySelector(".modal-download");
-
-  if (p.boton.link) {
-    modalDl.textContent = p.boton.texto;
-    modalDl.href = p.boton.link;
-  } else {
-    modalDl.remove();
-  }
-
-  // insertar modal
-
-  document.body.appendChild(modal);
 });
 
 //*****************************************************************************//

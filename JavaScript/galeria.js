@@ -1,34 +1,75 @@
 import { proyectos } from "./proyectos.js";
 
 const navbar = document.querySelector(".navbar");
-let lastMouseY = window.innerHeight;
+let currentProjectIndex = 0;
 
 // ======================================================
-// MODALES
+// MODALES - UN ÚNICO MODAL REUTILIZABLE
 // ======================================================
 
-// document.addEventListener("click", (e) => {
-//   const btn = e.target.closest(".open-modal");
-//   if (!btn) return;
+function updateModal(projectIndex) {
+  if (projectIndex < 0 || projectIndex >= proyectos.length) return;
+  
+  currentProjectIndex = projectIndex;
+  const proyecto = proyectos[projectIndex];
+  const modal = document.getElementById("project-modal");
 
-//   const modal = document.getElementById(btn.dataset.id);
-//   if (!modal) return;
+  if (!modal) return;
 
-//   modal.classList.remove("hidden");
-//   document.body.classList.add("modal-open");
-//   navbar.classList.remove("show");
-// });
+  // Actualizar contenido
+  modal.querySelector(".modal-title").textContent = proyecto.titulo;
+  modal.querySelector(".modal-text").innerHTML = proyecto.modalTexto;
+  
+  const modalText2 = modal.querySelector(".modal-text2");
+  if (modalText2) modalText2.innerHTML = "";
 
+  // Tecnologías
+  const techList = modal.querySelector(".tech-list");
+  techList.innerHTML = proyecto.techList
+    .map((tech) => `<li>${tech}</li>`)
+    .join("");
+
+  // Métodos
+  const methodsList = modal.querySelector(".methods-list");
+  methodsList.innerHTML = proyecto.methodsList
+    .map((method) => `<li>${method}</li>`)
+    .join("");
+
+  // Links de repositorios
+  const linksContainer = modal.querySelector(".modal-links");
+  linksContainer.querySelectorAll("a:not(.modal-download)").forEach(a => a.remove());
+  
+  proyecto.repos.forEach((r) => {
+    const link = document.createElement("a");
+    link.className = "btn-glow";
+    link.href = r.link;
+    link.target = "_blank";
+    link.textContent = r.label;
+    linksContainer.insertBefore(link, linksContainer.querySelector(".modal-download"));
+  });
+
+  // Botón descarga/enlace
+  const downloadBtn = modal.querySelector(".modal-download");
+  downloadBtn.textContent = proyecto.boton.texto;
+  downloadBtn.href = proyecto.boton.link;
+
+  // Reiniciar galería
+  setupGallery(proyecto.imagenes);
+}
+
+// Abrir modal
 document.addEventListener("click", (e) => {
   const btn = e.target.closest(".open-modal");
   if (!btn) return;
 
-  const modal = document.getElementById(btn.dataset.id);
+  const projectIndex = proyectos.findIndex((p) => p.id === btn.dataset.id);
+  if (projectIndex === -1) return;
+
+  const modal = document.getElementById("project-modal");
   if (!modal) return;
 
   const content = modal.querySelector(".modal-content");
 
-  // Reset de clases antes de abrir
   content.classList.remove("modal-animate-out");
   content.classList.remove("modal-animate-in");
 
@@ -36,151 +77,110 @@ document.addEventListener("click", (e) => {
   document.body.classList.add("modal-open");
   navbar.classList.remove("show");
 
-  // Forzar reflow → permite reproducir animación siempre
   void content.offsetWidth;
-
-  // Animación de entrada
   content.classList.add("modal-animate-in");
+
+  updateModal(projectIndex);
 });
 
-function closeModal(modalEl) {
-  if (!modalEl) return;
+function closeModal() {
+  const modal = document.getElementById("project-modal");
+  if (!modal) return;
 
-  const content = modalEl.querySelector(".modal-content");
+  const content = modal.querySelector(".modal-content");
 
-  // Reset previo
   content.classList.remove("modal-animate-in");
   content.classList.remove("modal-animate-out");
 
-  // Forzar reflow para poder animar la salida
   void content.offsetWidth;
 
-  // Animación salida
   content.classList.add("modal-animate-out");
 
   content.addEventListener(
     "animationend",
     () => {
-      modalEl.classList.add("hidden");
+      modal.classList.add("hidden");
       document.body.classList.remove("modal-open");
     },
     { once: true }
   );
 }
 
+// Cerrar modal
 document.addEventListener("click", (e) => {
-  // const btn = e.target.closest(".close-modal");
   const btn = e.target.closest(".close-modal") || e.target.closest(".modal-close-top");
   if (!btn) return;
 
-  const modal = btn.closest(".project-modal");
-  closeModal(modal);
+  closeModal();
 });
 
-
-
-
-
-// NUEVO
-// Navegación entre PROYECTOS desde el modal
+// Navegar entre proyectos
 document.addEventListener("click", (e) => {
-  const modal = e.target.closest(".project-modal");
-  if (!modal) return;
+  const nextBtn = e.target.closest(".next-project");
+  const prevBtn = e.target.closest(".prev-project");
 
-  const modalId = modal.id;
-
-  if (e.target.closest(".next-project")) {
-    navigateProject(modalId, "next");
+  if (nextBtn) {
+    navigateProject("next");
   }
 
-  if (e.target.closest(".prev-project")) {
-    navigateProject(modalId, "prev");
+  if (prevBtn) {
+    navigateProject("prev");
   }
 });
 
-// NUEVO
-function navigateProject(currentModalId, direction) {
-  const currentIndex = proyectos.findIndex((p) => p.id === currentModalId);
-  if (currentIndex === -1) return;
+function navigateProject(direction) {
+  let nextIndex = direction === "next" ? currentProjectIndex + 1 : currentProjectIndex - 1;
 
-  let nextIndex = direction === "next" ? currentIndex + 1 : currentIndex - 1;
-
-  // loop circular
+  // Loop circular
   if (nextIndex < 0) nextIndex = proyectos.length - 1;
   if (nextIndex >= proyectos.length) nextIndex = 0;
 
-  const nextId = proyectos[nextIndex].id;
+  const modal = document.getElementById("project-modal");
+  const content = modal.querySelector(".modal-content");
 
-  const currentModal = document.getElementById(currentModalId);
-  const nextModal = document.getElementById(nextId);
+  // Animación de salida rápida (fade)
+  content.classList.remove("modal-animate-in");
+  content.classList.add("modal-animate-out");
 
-  // cerrar actual
-  closeModal(currentModal);
-
-  // esperar fin de animación de salida
   setTimeout(() => {
-    nextModal.classList.remove("hidden");
-    document.body.classList.add("modal-open");
-
-    const content = nextModal.querySelector(".modal-content");
+    updateModal(nextIndex);
+    
+    // Animación de entrada rápida (fade)
     content.classList.remove("modal-animate-out");
-
-    // reflow para reiniciar animación
     void content.offsetWidth;
     content.classList.add("modal-animate-in");
-
-    // reiniciar galería interna
-    setupGallery(nextId, proyectos[nextIndex].imagenes);
-  }, 180);
+  }, 50);
 }
 
-
-
-
-
-
-
-
-
-
-
-// Cerrar clic en overlay
+// Cerrar con overlay
 window.addEventListener("click", (e) => {
-  const modal = e.target.classList?.contains("project-modal") ? e.target : null;
-  if (modal) closeModal(modal);
+  const modal = document.getElementById("project-modal");
+  if (e.target === modal) closeModal();
 });
 
 // Cerrar con ESC
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
-    const openModal = document.querySelector(".project-modal:not(.hidden)");
-    if (openModal) closeModal(openModal);
+    const modal = document.getElementById("project-modal");
+    if (modal && !modal.classList.contains("hidden")) closeModal();
   }
 });
 
-// NUEVO
-// Navegación con flechas del TECLADO
+// Navegar con flechas del teclado
 window.addEventListener("keydown", (e) => {
-  const modal = document.querySelector(".project-modal:not(.hidden)");
-  if (!modal) return;
+  const modal = document.getElementById("project-modal");
+  if (!modal || modal.classList.contains("hidden")) return;
 
-  if (e.key === "ArrowRight") {
-    navigateProject(modal.id, "next");
-  }
-
-  if (e.key === "ArrowLeft") {
-    navigateProject(modal.id, "prev");
-  }
+  if (e.key === "ArrowRight") navigateProject("next");
+  if (e.key === "ArrowLeft") navigateProject("prev");
 });
-
-
 
 // ======================================================
 // GALERÍA REUTILIZABLE
 // ======================================================
 
-function setupGallery(modalId, images) {
-  const modal = document.getElementById(modalId);
+function setupGallery(images) {
+  const modal = document.getElementById("project-modal");
   if (!modal) return;
 
   const container = modal.querySelector(".modal-gallery-slider");
@@ -193,15 +193,29 @@ function setupGallery(modalId, images) {
   let index = 0;
   let currentSlide = null;
 
-  // ----- DOTS -----
+  // Limpiar slider
+  container.innerHTML = "";
   dotsContainer.innerHTML = "";
+
+  // Si no hay imágenes, mostrar mensaje
+  if (!images || images.length === 0) {
+    container.innerHTML = '<p style="text-align: center; padding: 20px;">Sin imágenes disponibles</p>';
+    return;
+  }
+
+  // Remover listeners previos clonando los botones
+  const newPrev = prev.cloneNode(true);
+  const newNext = next.cloneNode(true);
+  prev.replaceWith(newPrev);
+  next.replaceWith(newNext);
+
+  // Crear dots
   images.forEach((_, i) => {
     const dot = document.createElement("div");
     dot.classList.add("gallery-dot");
 
     dot.addEventListener("click", () => {
       if (i === index) return;
-
       const direction = i > index ? "next" : "prev";
       index = i;
       showSlide(direction);
@@ -216,7 +230,6 @@ function setupGallery(modalId, images) {
     });
   };
 
-  // ----- CREAR Y ANIMAR SLIDE -----
   function createSlide(src) {
     const slide = document.createElement("div");
     slide.classList.add("slide");
@@ -234,8 +247,12 @@ function setupGallery(modalId, images) {
       el.loading = "lazy";
 
       el.addEventListener("click", () => {
-        overlayImage.src = src;
-        overlay.classList.remove("hidden");
+        const overlay = document.getElementById("image-overlay");
+        const overlayImage = document.getElementById("overlay-image");
+        if (overlay && overlayImage) {
+          overlayImage.src = src;
+          overlay.classList.remove("hidden");
+        }
       });
     }
 
@@ -243,60 +260,30 @@ function setupGallery(modalId, images) {
     return slide;
   }
 
-  // function showSlide(direction = "next") {
-  //   const src = images[index];
-  //   const newSlide = createSlide(src);
-
-  //   newSlide.classList.add(direction === "next" ? "from-right" : "from-left");
-
-  //   container.appendChild(newSlide);
-
-  //   requestAnimationFrame(() => {
-  //     if (currentSlide) {
-  //       currentSlide.classList.add(
-  //         direction === "next" ? "to-left" : "to-right"
-  //       );
-
-  //       currentSlide.addEventListener(
-  //         "transitionend",
-  //         () => currentSlide.remove(),
-  //         { once: true }
-  //       );
-  //     }
-
-  //     newSlide.classList.remove("from-right", "from-left");
-  //     newSlide.classList.add("is-active");
-  //     currentSlide = newSlide;
-  //   });
-
-  //   updateDots();
-  // }
-
   function showSlide(direction = "next") {
+    if (images.length === 0) return;
+
     const src = images[index];
     const newSlide = createSlide(src);
 
-    // 🔥 LIMPIEZA CORRECTA
+    // Limpieza correcta
     if (currentSlide) {
       container.querySelectorAll(".slide").forEach((s) => {
         if (s !== currentSlide) s.remove();
       });
     }
 
-    // Animación de entrada
+    // Animación entrada
     newSlide.classList.add(direction === "next" ? "from-right" : "from-left");
     container.appendChild(newSlide);
 
     requestAnimationFrame(() => {
       if (currentSlide) {
-        currentSlide.classList.add(
-          direction === "next" ? "to-left" : "to-right"
-        );
+        currentSlide.classList.add(direction === "next" ? "to-left" : "to-right");
 
         currentSlide.addEventListener(
           "transitionend",
           (e) => {
-            // ignoramos el transitionend que dispara opacity
             if (e.propertyName !== "transform") return;
             currentSlide?.remove();
           },
@@ -312,43 +299,25 @@ function setupGallery(modalId, images) {
     updateDots();
   }
 
-  // ----- CONTROLES PREV / NEXT -----
-  prev.type = "button";
-  next.type = "button";
+  // Controles
+  newPrev.type = "button";
+  newNext.type = "button";
 
-  prev.addEventListener("click", (e) => {
+  newPrev.addEventListener("click", (e) => {
     e.preventDefault();
     index = (index - 1 + images.length) % images.length;
     showSlide("prev");
   });
 
-  next.addEventListener("click", (e) => {
+  newNext.addEventListener("click", (e) => {
     e.preventDefault();
     index = (index + 1) % images.length;
     showSlide("next");
   });
 
-  // Al abrir el modal, siempre arrancamos desde la primera imagen
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".open-modal");
-    if (!btn) return;
-    if (btn.dataset.id !== modalId) return;
-
-    index = 0;
-    showSlide("next");
-  });
-
-  // Inicializa por si acaso
+  // Mostrar primera imagen
   showSlide("next");
 }
-
-// ======================================================
-// IMÁGENES POR PROYECTO (automático)
-// ======================================================
-
-document.addEventListener("DOMContentLoaded", () => {
-  proyectos.forEach((p) => setupGallery(p.id, p.imagenes));
-});
 
 // ======================================================
 // OVERLAY (zoom)
@@ -358,7 +327,12 @@ const overlay = document.getElementById("image-overlay");
 const overlayImage = document.getElementById("overlay-image");
 const closeOverlay = document.getElementById("close-overlay");
 
-closeOverlay.addEventListener("click", () => overlay.classList.add("hidden"));
-overlay.addEventListener("click", (e) => {
-  if (e.target === overlay) overlay.classList.add("hidden");
-});
+if (closeOverlay) {
+  closeOverlay.addEventListener("click", () => overlay.classList.add("hidden"));
+}
+
+if (overlay) {
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) overlay.classList.add("hidden");
+  });
+}

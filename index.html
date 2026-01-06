@@ -18,7 +18,7 @@
             document.documentElement.setAttribute("data-theme", savedTheme);
         })();
     </script>
-    
+
     <link id="favicon" rel="icon" href="Logos/logo_blanco.webp">
 
     <link rel="stylesheet" href="/css/main.css" />
@@ -58,8 +58,7 @@
         <p class="subtitle">Desarrollador .NET | Aplicaciones web, desktop y manejo de datos</p>
         <div class="hero-buttons">
 
-             <a href="/CV/cv-franco-wagenhofer.pdf" download
-                class="btn btn-primary btn-glow">Descargar CV</a>
+            <a href="/CV/cv-franco-wagenhofer.pdf" download class="btn btn-primary btn-glow">Descargar CV</a>
             <a href="https://linkedin.com/in/franco-wagenhöfer" target="_blank" rel="noopener noreferrer"
                 class="btn btn-secondary btn-glow">LinkedIn</a>
             <a href="https://github.com/francowagenhofer" target="_blank" rel="noopener noreferrer"
@@ -88,66 +87,57 @@
                     </div>
                 </article>
             </template>
-            <template id="modal-template">
-                <div class="project-modal hidden" role="dialog" aria-modal="true">
+            <!-- Modal -->
+            <!-- <div id="project-modal" class="project-modal hidden" role="dialog" aria-modal="true">
+                <button class="modal-close-top" aria-label="Cerrar">&times;</button>
+                <button class="modal-nav prev-project" aria-label="Proyecto anterior">‹</button>
+                <button class="modal-nav next-project" aria-label="Proyecto siguiente">›</button>
 
-                    <button class="modal-close-top" aria-label="Cerrar">&times;</button>
-                    <button class="modal-nav prev-project" aria-label="Proyecto anterior">‹</button>
-                    <button class="modal-nav next-project" aria-label="Proyecto siguiente">›</button>
-
-                    <div class="modal-content">
-                        <button class="close-modal close-inside" aria-label="Cerrar">&times;</button>
-                        <h3 class="modal-title"></h3>
-                        <div class="modal-body modal-grid">
-                            <div class="modal-block gallery-block">
-                                <h4>Imagenes</h4>
-                                <div class="modal-gallery">
-                                    <div class="modal-gallery-slider"></div>
-                                    <div class="gallery-controls">
-                                        <button class="gallery-prev" type="button" aria-label="Imagen anterior">
-                                            <svg height="22px" viewBox="0 -960 960 960" width="22px"
-                                                fill="currentColor">
-                                                <path
-                                                    d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
-                                            </svg>
-                                        </button>
-                                        <div class="gallery-dots"></div>
-                                        <button class="gallery-next" type="button" aria-label="Imagen siguiente">
-                                            <svg height="22px" viewBox="0 -960 960 960" width="22px"
-                                                fill="currentColor">
-                                                <path
-                                                    d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                <div class="modal-content">
+                    <button class="close-modal close-inside" aria-label="Cerrar">&times;</button>
+                    <h3 class="modal-title"></h3>
+                    <div class="modal-body modal-grid">
+                        <div class="modal-block gallery-block">
+                            <h4>Imagenes</h4>
+                            <div class="modal-gallery">
+                                <div class="modal-gallery-slider"></div>
+                                <div class="gallery-controls">
+                                    <button class="gallery-prev" type="button" aria-label="Imagen anterior">
+                                        <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
+                                            <path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
+                                        </svg>
+                                    </button>
+                                    <div class="gallery-dots"></div>
+                                    <button class="gallery-next" type="button" aria-label="Imagen siguiente">
+                                        <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
+                                            <path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="modal-block description-block">
-                                <h4>Descripción</h4>
-                                <p class="modal-text"></p>
-                                <p class="modal-text2"></p>
-                            </div>
-
-                            <div class="modal-block tech-block">
-                                <h4>Tecnologías</h4>
-                                <ul class="tech-list"></ul>
-                            </div>
-                            <div class="modal-block methods-block">
-                                <h4>Métodos</h4>
-                                <ul class="methods-list"></ul>
-                            </div>
                         </div>
-
-                        <div class="project-links modal-links">
-                            <a class="modal-download btn-glow" target="_blank"></a>
+                        <div class="modal-block description-block">
+                            <h4>Descripción</h4>
+                            <p class="modal-text"></p>
+                            <p class="modal-text2"></p>
                         </div>
-
+                        <div class="modal-block tech-block">
+                            <h4>Tecnologías</h4>
+                            <ul class="tech-list"></ul>
+                        </div>
+                        <div class="modal-block methods-block">
+                            <h4>Métodos</h4>
+                            <ul class="methods-list"></ul>
+                        </div>
+                    </div>
+                    <div class="project-links modal-links">
+                        <a class="modal-download btn-glow" target="_blank"></a>
                     </div>
                 </div>
-                </div>
-            </template>
+            </div> -->
         </section>
 
+        <!-- Habilidades -->
         <section id="skills" class="section">
 
             <h2 class="skills-title">Tecnologías & Herramientas</h2>
@@ -295,6 +285,7 @@
             </div>
         </section>
 
+        <!-- Sobre mi -->
         <section id="about" class="section">
             <h2>Sobre mí</h2>
             <p class="about-text">
@@ -307,6 +298,7 @@
             </p>
         </section>
 
+        <!-- Contacto -->
         <section id="contact" class="contact-section">
             <h2>Contacto</h2>
             <div class="contact-container">
@@ -365,8 +357,7 @@
                         </li>
                     </ul>
 
-                    <a href="/CV/cv-franco-wagenhofer.pdf"
-                        class="contact-btn-902 btn-icon-download" download>
+                    <a href="/CV/cv-franco-wagenhofer.pdf" class="contact-btn-902 btn-icon-download" download>
                         Descargar CV
                     </a>
                 </div>
@@ -401,6 +392,59 @@
         </div>
     </footer>
 
+    <!-- Modales-->
+    <div id="project-modal" class="project-modal hidden" role="dialog" aria-modal="true">
+        <button class="modal-close-top" aria-label="Cerrar">&times;</button>
+        <button class="modal-nav prev-project" aria-label="Proyecto anterior">‹</button>
+        <button class="modal-nav next-project" aria-label="Proyecto siguiente">›</button>
+
+        <div class="modal-content">
+            <button class="close-modal close-inside" aria-label="Cerrar">&times;</button>
+            <h3 class="modal-title"></h3>
+            <div class="modal-body modal-grid">
+                <div class="modal-block gallery-block">
+                    <h4>Imagenes</h4>
+                    <div class="modal-gallery">
+                        <div class="modal-gallery-slider"></div>
+                        <div class="gallery-controls">
+                            <button class="gallery-prev" type="button" aria-label="Imagen anterior">
+                                <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
+                                    <path
+                                        d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
+                                </svg>
+                            </button>
+                            <div class="gallery-dots"></div>
+                            <button class="gallery-next" type="button" aria-label="Imagen siguiente">
+                                <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
+                                    <path
+                                        d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-block description-block">
+                    <h4>Descripción</h4>
+                    <p class="modal-text"></p>
+                    <p class="modal-text2"></p>
+                </div>
+                <div class="modal-block tech-block">
+                    <h4>Tecnologías</h4>
+                    <ul class="tech-list"></ul>
+                </div>
+                <div class="modal-block methods-block">
+                    <h4>Métodos</h4>
+                    <ul class="methods-list"></ul>
+                </div>
+            </div>
+            <div class="project-links modal-links">
+                <a class="modal-download btn-glow" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+    <!-- fin de modales -->
+
+    <!-- Imagenes "agrandadas" -->
     <div id="image-overlay" class="hidden">
         <span id="close-overlay">&times;</span>
         <img id="overlay-image" src="" alt="Imagen ampliada" loading="lazy" />

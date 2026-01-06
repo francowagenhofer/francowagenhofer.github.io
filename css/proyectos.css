@@ -257,40 +257,38 @@
 }
 
 
-/* ENTRADA */
-.modal-animate-in {
-    animation: modalIn 0.16s ease-out forwards;
+/* ANIMACIONES DE NAVEGACIÓN (fade simple y rápido) */
+/* Entrada rápida */
+.modal-animate-in,
+.modal-slide-in-right,
+.modal-slide-in-left {
+    animation: modalFadeIn 0.06s ease-out forwards;
 }
 
-@keyframes modalIn {
+@keyframes modalFadeIn {
     from {
         opacity: 0;
-        transform: scale(0.97) translateY(4px);
     }
-
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
     }
 }
 
-/* SALIDA */
-.modal-animate-out {
-    animation: modalOut 0.14s ease-in forwards;
+/* Salida rápida */
+.modal-animate-out,
+.modal-slide-out-left,
+.modal-slide-out-right {
+    animation: modalFadeOut 0.06s ease-in forwards;
 }
 
-@keyframes modalOut {
+@keyframes modalFadeOut {
     from {
         opacity: 1;
-        transform: scale(1) translateY(0);
     }
-
     to {
         opacity: 0;
-        transform: scale(0.95) translateY(3px);
     }
 }
-
 
 /* Scrollbar elegante */
 .modal-content::-webkit-scrollbar {
