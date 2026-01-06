@@ -105,45 +105,47 @@ export const proyectos = [
 
   {
     id: "modal2",
-    titulo: "WebBook",
-    descripcion: "Próximamente - App web para una biblioteca personalizada.",
+    titulo: "MovieApp MVC",
+    descripcion: "App web MVC en C# .NET para gestión de catálogo de películas.",
     iconos: [
       `${base}Iconos/csharp.svg`,
       `${base}Iconos/dotnet2.svg`,
-      `${base}Iconos/angular.svg`,
+      `${base}Iconos/bootstrap.svg`,
       `${base}Iconos/sql-server.svg`,
     ],
     boton: {
-      texto: "boton para redirigir o descargar..",
+      texto: "Ver Repositorio",
+      link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
     },
     modalTexto: `
-      <p><strong>En desarrollo...</strong> WebBook es un proyecto personal para explorar y organizar libros, autores y géneros. 
-      Permitirá perfiles, favoritos, reseñas y más.</p>
+      <p><strong>App web ASP.NET MVC para gestión completa de películas.</strong> 
+      Permite administrar un catálogo de películas con CRUD completo, sistema de reviews con calificaciones, 
+      gestión de favoritos y autenticación con roles diferenciados.</p>
 
-      <p>Planteado como práctica integral fullstack con <strong>Angular</strong>, 
-      <strong>ASP.NET Core Web API</strong> y <strong>SQL Server</strong>.</p>
+      <p><strong>Objetivo del proyecto:</strong> Desarrollar una aplicación integral que combine gestión de datos, 
+      autenticación segura con ASP.NET Identity, arquitectura MVC y una interfaz moderna y responsive.</p>
     `,
     techList: [
-      "<strong>Frontend:</strong> Angular",
-      "<strong>Backend:</strong> ASP.NET Core Web API",
-      "<strong>Lenguaje:</strong> TypeScript / C#",
+      "<strong>Frontend:</strong> Razor Views, HTML, CSS, Bootstrap",
+      "<strong>Backend:</strong> C#, ASP.NET MVC (.NET 9)",
+      "<strong>ORM:</strong> Entity Framework Core",
       "<strong>Base de datos:</strong> SQL Server",
+      "<strong>Autenticación:</strong> ASP.NET Identity",
+      "<strong>IDE:</strong> Visual Studio 2022",
     ],
     methodsList: [
-      "<strong>API:</strong> REST + JWT",
-      "<strong>Datos:</strong> EF Core",
-      "<strong>UI:</strong> Reactive Forms",
-      "<strong>Filtros:</strong> Query Params",
+      "<strong>Lógica:</strong> POO y arquitectura MVC",
+      "<strong>Gestión:</strong> CRUD con validaciones",
+      "<strong>Consultas:</strong> LINQ y T-SQL",
+      "<strong>Seguridad:</strong> Sistema de roles (admin/usuario)",
+      "<strong>Features:</strong> Reviews, favoritos, filtros dinámicos",
     ],
     repos: [
       {
         label: "Repositorio",
-        link: "", 
+        link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
       },
     ],
-    imagenes: [
-      `${base}Imagenes/WebBook/default.webp`,
-      `${base}Imagenes/WebBook/tapa.webp`,
-    ],
+    imagenes: [],
   },
 ];
