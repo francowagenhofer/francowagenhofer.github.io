@@ -3,7 +3,7 @@ const base = import.meta.env.BASE_URL;
 export const proyectos = [
   {
     id: "modal1",
-    titulo: "MovieApp",
+    titulo: ".MovieApp",
     tipo: "App web",
     framework: "MVC",
     descripcion:

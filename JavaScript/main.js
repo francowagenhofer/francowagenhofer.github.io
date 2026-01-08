@@ -152,6 +152,8 @@ proyectos.forEach((p) => {
   if (p.boton?.link) {
     dlBtn.textContent = p.boton.texto;
     dlBtn.href = p.boton.link;
+    dlBtn.target = "_blank";
+    dlBtn.rel = "noopener noreferrer";
   } else {
     dlBtn.style.display = "none";
   }

@@ -425,12 +425,26 @@
 }
 
 .modal-title {
-    text-align: center;
+    text-align: left;
     font-size: 2rem;
-    margin-top: 0;
     margin-top: 0.1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.6rem;
     font-weight: 650;
+    position: relative;
+    padding-bottom: 0.2rem;
+}
+
+.modal-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.35rem;
+    height: 2px;
+    /* width: clamp(48px, 12vw, 96px); */
+    width: clamp(200px, 12vw, 96px);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--btn-bg), transparent 80%);
+    opacity: 0.85;
 }
 
 .modal-close-top {
