@@ -82,6 +82,13 @@
   color: #a855f7;
 }
 
+.card-badge-framework {
+  background: rgba(82, 196, 140, 0.12);
+  border: 1px solid rgba(82, 196, 140, 0.35);
+  color: #6ac399;
+  color: #008c4d;
+}
+
 .card-title {
   font-size: 1.35rem;
   font-weight: 650;

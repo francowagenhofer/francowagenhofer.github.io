@@ -5,6 +5,7 @@ export const proyectos = [
     id: "modal1",
     titulo: "MovieApp",
     tipo: "App web",
+    framework: "MVC",
     descripcion:
       "Catálogo de películas con sistema de reseñas, favoritos y calificaciones.",
 
@@ -42,10 +43,10 @@ export const proyectos = [
       "<strong>Features:</strong> Reviews, favoritos, filtros dinámicos",
     ],
     repos: [
-      {
-        label: "Repositorio",
-        link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
-      },
+      // {
+      //   label: "Repositorio",
+      //   link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
+      // },
     ],
     imagenes: [
       `${base}Imagenes/MovieApp/home.webp`,
@@ -58,6 +59,7 @@ export const proyectos = [
     id: "modal2",
     titulo: "CatálogoWeb",
     tipo: "App web",
+    framework: "web forms",
     descripcion:
       // "App web en C# con .NET para gestión de catálogo de artículos.",
       "Plataforma web para administrar y filtrar productos con control de acceso.",
@@ -108,7 +110,8 @@ export const proyectos = [
   {
     id: "modal3",
     titulo: "Gestor Pyme",
-    tipo: "App de escritorio",
+    tipo: "App escritorio",
+    framework: "Winforms",
     descripcion:
       "Gestión integral de empleados, proyectos y salarios para pymes.",
     // "App de escritorio en C# .NET para gestión integral de una pyme.",

@@ -118,10 +118,16 @@ proyectos.forEach((p) => {
   card.querySelector(".card-title").textContent = p.titulo;
   card.querySelector(".card-description").textContent = p.descripcion;
 
-  // Llenar badge tipo
+  // badge tipo
   if (p.tipo) {
     const badgeText = card.querySelector(".card-badge-tipo .badge-text");
     if (badgeText) badgeText.textContent = p.tipo;
+  }
+  
+  // badge framework
+  if (p.framework) {
+    const badgeText = card.querySelector(".card-badge-framework .badge-text");
+    if (badgeText) badgeText.textContent = p.framework;
   }
 
   const icons = card.querySelectorAll(".card-tech img");
