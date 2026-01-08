@@ -41,7 +41,7 @@ function updateModal(projectIndex) {
   
   proyecto.repos.forEach((r) => {
     const link = document.createElement("a");
-    link.className = "btn-glow";
+    link.className = "btn btn-glow";
     link.href = r.link;
     link.target = "_blank";
     link.textContent = r.label;

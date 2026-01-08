@@ -2,10 +2,116 @@ const base = import.meta.env.BASE_URL;
 
 export const proyectos = [
   {
+    id: "modal1",
+    titulo: "MovieApp",
+    tipo: "App web",
+    descripcion:
+      "Catálogo de películas con sistema de reseñas, favoritos y calificaciones.",
+
+    iconos: [
+      `${base}Iconos/csharp.svg`,
+      `${base}Iconos/dotnet2.svg`,
+      `${base}Iconos/bootstrap.svg`,
+      `${base}Iconos/sql-server.svg`,
+    ],
+    boton: {
+      texto: "Ver Repositorio",
+      link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
+    },
+    modalTexto: `
+      <p><strong>App web ASP.NET MVC para gestión completa de películas.</strong> 
+      Permite administrar un catálogo de películas con CRUD completo, sistema de reviews con calificaciones, 
+      gestión de favoritos y autenticación con roles diferenciados.</p>
+
+      <p><strong>Objetivo del proyecto:</strong> Desarrollar una aplicación integral que combine gestión de datos, 
+      autenticación segura con ASP.NET Identity, arquitectura MVC y una interfaz moderna y responsive.</p>
+    `,
+    techList: [
+      "<strong>Frontend:</strong> Razor Views, HTML, CSS, Bootstrap",
+      "<strong>Backend:</strong> C#, ASP.NET MVC (.NET 9)",
+      "<strong>ORM:</strong> Entity Framework Core",
+      "<strong>Base de datos:</strong> SQL Server",
+      "<strong>Autenticación:</strong> ASP.NET Identity",
+      "<strong>IDE:</strong> Visual Studio 2022",
+    ],
+    methodsList: [
+      "<strong>Lógica:</strong> POO y arquitectura MVC",
+      "<strong>Gestión:</strong> CRUD con validaciones",
+      "<strong>Consultas:</strong> LINQ y T-SQL",
+      "<strong>Seguridad:</strong> Sistema de roles (admin/usuario)",
+      "<strong>Features:</strong> Reviews, favoritos, filtros dinámicos",
+    ],
+    repos: [
+      {
+        label: "Repositorio",
+        link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
+      },
+    ],
+    imagenes: [
+      `${base}Imagenes/MovieApp/home.webp`,
+      `${base}Imagenes/MovieApp/favoritos.webp`,
+      `${base}Imagenes/MovieApp/reseñas.webp`,
+      `${base}Imagenes/MovieApp/admin.webp`,
+    ],
+  },
+  {
+    id: "modal2",
+    titulo: "CatálogoWeb",
+    tipo: "App web",
+    descripcion:
+      // "App web en C# con .NET para gestión de catálogo de artículos.",
+      "Plataforma web para administrar y filtrar productos con control de acceso.",
+    iconos: [
+      `${base}Iconos/csharp.svg`,
+      `${base}Iconos/dotnet2.svg`,
+      `${base}Iconos/bootstrap.svg`,
+      `${base}Iconos/sql-server.svg`,
+    ],
+    boton: {
+      texto: "Sitio Web",
+      link: "http://webcatalog.somee.com/",
+    },
+    modalTexto: `
+            <p><strong>App web en C# con ASP.NET Web Forms para gestión de artículos.</strong> 
+            Permite administrar productos con CRUD completo, filtrar por categorías y gestionar usuarios con roles.</p>
+
+            <p><strong>Objetivo del proyecto:</strong> Simular escenarios reales de inventario, aplicando arquitectura en capas,
+            seguridad básica, patrones de diseño y usabilidad.</p>
+        `,
+    techList: [
+      "<strong>Frontend:</strong> Bootstrap",
+      "<strong>Backend:</strong> C#, ASP.NET Web Forms",
+      "<strong>Base de datos:</strong> SQL Server",
+      "<strong>IDE:</strong> Visual Studio",
+      "<strong>Host:</strong> Somee",
+    ],
+    methodsList: [
+      "<strong>Lógica:</strong> POO",
+      "<strong>Arquitectura:</strong> Capas (dominio, negocio, UI)",
+      "<strong>Gestión:</strong> CRUD con validaciones",
+      "<strong>Consultas:</strong> T-SQL y joins",
+      "<strong>Seguridad:</strong> Roles y login",
+    ],
+    repos: [
+      {
+        label: "Repositorio",
+        link: "https://github.com/francowagenhofer/tp-final-nivel3-Wagenhofer-Franco.git",
+      },
+    ],
+    imagenes: [
+      `${base}Imagenes/CatalogoWeb/CatalogoWeb.webp`,
+      `${base}Imagenes/CatalogoWeb/CatalogoWeb_Lista.webp`,
+      `${base}Imagenes/CatalogoWeb/CatalogoWeb_Articulo.webp`,
+      `${base}Imagenes/CatalogoWeb/CatalogoWebDB.webp`,
+    ],
+  },
+  {
     id: "modal3",
     titulo: "Gestor Pyme",
+    tipo: "App de escritorio",
     descripcion:
-      "App de escritorio en C# .NET para gestión integral de una pyme.",
+      "Gestión integral de empleados, proyectos y salarios para pymes.",
+    // "App de escritorio en C# .NET para gestión integral de una pyme.",
     iconos: [
       `${base}Iconos/csharp.svg`,
       `${base}Iconos/dotnet2.svg`,
@@ -52,100 +158,5 @@ export const proyectos = [
       `${base}Imagenes/GestorEmpleados/MenuConsola.webp`,
       `${base}Imagenes/GestorEmpleados/GestionEmpleadosDB.webp`,
     ],
-  },
-  {
-    id: "modal1",
-    titulo: "Catálogo Web",
-    descripcion:
-      "App web en C# con .NET para gestión de catálogo de artículos.",
-    iconos: [
-      `${base}Iconos/csharp.svg`,
-      `${base}Iconos/dotnet2.svg`,
-      `${base}Iconos/bootstrap.svg`,
-      `${base}Iconos/sql-server.svg`,
-    ],
-    boton: {
-      texto: "Sitio Web",
-      link: "http://webcatalog.somee.com/",
-    },
-    modalTexto: `
-            <p><strong>App web en C# con ASP.NET Web Forms para gestión de artículos.</strong> 
-            Permite administrar productos con CRUD completo, filtrar por categorías y gestionar usuarios con roles.</p>
-
-            <p><strong>Objetivo del proyecto:</strong> Simular escenarios reales de inventario, aplicando arquitectura en capas,
-            seguridad básica, patrones de diseño y usabilidad.</p>
-        `,
-    techList: [
-      "<strong>Frontend:</strong> Bootstrap",
-      "<strong>Backend:</strong> C#, ASP.NET Web Forms",
-      "<strong>Base de datos:</strong> SQL Server",
-      "<strong>IDE:</strong> Visual Studio",
-      "<strong>Host:</strong> Somee",
-    ],
-    methodsList: [
-      "<strong>Lógica:</strong> POO",
-      "<strong>Arquitectura:</strong> Capas (dominio, negocio, UI)",
-      "<strong>Gestión:</strong> CRUD con validaciones",
-      "<strong>Consultas:</strong> T-SQL y joins",
-      "<strong>Seguridad:</strong> Roles y login",
-    ],
-    repos: [
-      {
-        label: "Repositorio",
-        link: "https://github.com/francowagenhofer/tp-final-nivel3-Wagenhofer-Franco.git",
-      },
-    ],
-    imagenes: [
-      `${base}Imagenes/CatalogoWeb/CatalogoWeb.webp`,
-      `${base}Imagenes/CatalogoWeb/CatalogoWeb_Lista.webp`,
-      `${base}Imagenes/CatalogoWeb/CatalogoWeb_Articulo.webp`,
-      `${base}Imagenes/CatalogoWeb/CatalogoWebDB.webp`,
-    ],
-  },
-
-  {
-    id: "modal2",
-    titulo: "MovieApp MVC",
-    descripcion: "App web MVC en C# .NET para gestión de catálogo de películas.",
-    iconos: [
-      `${base}Iconos/csharp.svg`,
-      `${base}Iconos/dotnet2.svg`,
-      `${base}Iconos/bootstrap.svg`,
-      `${base}Iconos/sql-server.svg`,
-    ],
-    boton: {
-      texto: "Ver Repositorio",
-      link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
-    },
-    modalTexto: `
-      <p><strong>App web ASP.NET MVC para gestión completa de películas.</strong> 
-      Permite administrar un catálogo de películas con CRUD completo, sistema de reviews con calificaciones, 
-      gestión de favoritos y autenticación con roles diferenciados.</p>
-
-      <p><strong>Objetivo del proyecto:</strong> Desarrollar una aplicación integral que combine gestión de datos, 
-      autenticación segura con ASP.NET Identity, arquitectura MVC y una interfaz moderna y responsive.</p>
-    `,
-    techList: [
-      "<strong>Frontend:</strong> Razor Views, HTML, CSS, Bootstrap",
-      "<strong>Backend:</strong> C#, ASP.NET MVC (.NET 9)",
-      "<strong>ORM:</strong> Entity Framework Core",
-      "<strong>Base de datos:</strong> SQL Server",
-      "<strong>Autenticación:</strong> ASP.NET Identity",
-      "<strong>IDE:</strong> Visual Studio 2022",
-    ],
-    methodsList: [
-      "<strong>Lógica:</strong> POO y arquitectura MVC",
-      "<strong>Gestión:</strong> CRUD con validaciones",
-      "<strong>Consultas:</strong> LINQ y T-SQL",
-      "<strong>Seguridad:</strong> Sistema de roles (admin/usuario)",
-      "<strong>Features:</strong> Reviews, favoritos, filtros dinámicos",
-    ],
-    repos: [
-      {
-        label: "Repositorio",
-        link: "https://github.com/francowagenhofer/movieapp-mvc-dotnet",
-      },
-    ],
-    imagenes: [],
   },
 ];

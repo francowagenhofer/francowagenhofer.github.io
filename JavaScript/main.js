@@ -5,18 +5,12 @@ import { proyectos } from "./proyectos.js";
 import emailjs from "@emailjs/browser";
 import "../css/main.css";
 
-emailjs.init("uWi6YuvGoxMA-TSfo"); // Inicializar EmailJS
-
-//****************************************************************************************************************************//
-// VARIABLES GLOBALES
+emailjs.init("uWi6YuvGoxMA-TSfo");
 
 let currentTheme = "dark";
 const gradientCanvas = document.getElementById("gradient");
 const toggle = document.getElementById("theme-toggle");
 const navbar = document.querySelector(".navbar");
-
-//****************************************************************************************************************************//
-// Tema: Gradiente + colores + íconos
 
 let gradient;
 const githubIcons = document.querySelectorAll('[data-icon="github"]');
@@ -51,21 +45,14 @@ function updateGithubIcons(theme) {
   githubIcons.forEach((img) => (img.src = src));
 }
 
-//***************************************************************//
-// APLICA TODOS LOS RECURSOS DE TEMA
 function applyThemeAssets(theme) {
   applyThemeColors(theme);
   updateGithubIcons(theme);
   updateLogos(theme);
-  // updateFavicon(theme);
 }
-
-//***************************************************************//
-// GRADIENT OPTIMIZADO
 
 function optimizeGradientConfig(config) {
   if (window.innerWidth < 1300) {
-    console.log("⚡ Configuración optimizada para pantallas chicas");
     config.resolution = 0.55;
     config.grainIntensity *= 0.5;
     config.speed *= 0.75;
@@ -77,53 +64,31 @@ function optimizeGradientConfig(config) {
 }
 
 function createGradient(theme) {
-  const baseConfig =
-    theme === "dark" ? darkThemeConfig : lightThemeConfig;
-
+  const baseConfig = theme === "dark" ? darkThemeConfig : lightThemeConfig;
   const optimizedConfig = optimizeGradientConfig({ ...baseConfig });
-
   gradient = new NeatGradient({
     ref: gradientCanvas,
     ...optimizedConfig,
   });
 }
 
-//*************************************************************//
-// INICIALIZACIÓN
-
 const savedTheme = localStorage.getItem("theme") || "dark";
 currentTheme = savedTheme;
-
-// Aplicar theme completo (colores, logos, github, favicon)
 applyThemeAssets(currentTheme);
-
-// Marcar toggle
 toggle.checked = currentTheme === "dark";
-
-// Crear gradient inicial
 createGradient(currentTheme);
-
-//*************************************************************//
-// CAMBIO DE TEMA
 
 function toggleTheme() {
   currentTheme = toggle.checked ? "dark" : "light";
-
   applyThemeAssets(currentTheme);
-
   gradient.destroy();
   createGradient(currentTheme);
-
   localStorage.setItem("theme", currentTheme);
 }
 
 toggle.addEventListener("change", toggleTheme);
 
-
-//************************************************************//
-//************************************************************//
-// Navbar por hover (guarda última Y)
-let lastMouseY = window.innerHeight; // empieza oculto
+let lastMouseY = window.innerHeight;
 function updateNavbar(y) {
   const triggerZone = window.innerHeight * 0.25;
   navbar.classList.toggle("show", y < triggerZone);
@@ -136,53 +101,49 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
-//*********************************************************************//
-//*********************************************************************//
-// # RENDERIZACION DE PROYECTOS - SOLO CARDS (modal único en galeria.js)
-
+// RENDERIZACION DE PROYECTOS
 const container = document.getElementById("projects-container");
 const cardTemplate = document.getElementById("project-template");
 
 proyectos.forEach((p) => {
-  // ---------------------------
-  // CARD
-  // ---------------------------
   const cardFragment = cardTemplate.content.cloneNode(true);
   const card = cardFragment.querySelector(".project-card");
 
-  card.classList.remove("hidden");
-  card.querySelector(".card-title").textContent = p.titulo;
-  card.querySelector(".card-desc").textContent = p.descripcion;
+  const img = card.querySelector(".card-image");
+  if (p.imagenes?.length) {
+    img.src = p.imagenes[0];
+    img.alt = p.titulo;
+  }
 
-  // iconos del proyecto
-  const icons = card.querySelectorAll(".card-icons img");
+  card.querySelector(".card-title").textContent = p.titulo;
+  card.querySelector(".card-description").textContent = p.descripcion;
+
+  // Llenar badge tipo
+  if (p.tipo) {
+    const badgeText = card.querySelector(".card-badge-tipo .badge-text");
+    if (badgeText) badgeText.textContent = p.tipo;
+  }
+
+  const icons = card.querySelectorAll(".card-tech img");
   p.iconos.forEach((src, i) => {
     if (icons[i]) icons[i].src = src;
   });
 
-  // botón de descarga
-  const dl = card.querySelector(".card-download");
-
-  if (p.boton.link) {
-    dl.textContent = p.boton.texto;
-    dl.href = p.boton.link;
+  const dlBtn = card.querySelector(".card-download");
+  if (p.boton?.link) {
+    dlBtn.textContent = p.boton.texto;
+    dlBtn.href = p.boton.link;
   } else {
-    dl.remove();
+    dlBtn.style.display = "none";
   }
 
-  // botón abrir modal
-  const btnModal = card.querySelector(".card-open");
-  btnModal.dataset.id = p.id;
+  const repoBtn = card.querySelector(".open-modal");
+  repoBtn.dataset.id = p.id;
 
   container.appendChild(card);
 });
 
-//*****************************************************************************//
-//*****************************************************************************//
-
 // SCROLL
-
-// Todas las secciones excepto el hero
 const reveals = document.querySelectorAll(
   "section, article, .skill-card, .project-card, .contact-container"
 );
@@ -205,10 +166,6 @@ const observer = new IntersectionObserver(
 
 reveals.forEach((el) => observer.observe(el));
 
-// ------------------------------
-// REVEAL PARA EL HEADER
-// ------------------------------
-
 const hero = document.querySelector("#home");
 const heroItems = [
   hero.querySelector(".blend-title"),
@@ -222,78 +179,44 @@ heroItems.forEach((el, i) => {
   observer.observe(el);
 });
 
-// ------------------------------
-//  DESVANECIMIENTO HEADER - falta arreglarlo - pierde el color el titulo
-// ------------------------------
-
-// const heroSection = document.getElementById("home");
-
-// window.addEventListener("scroll", () => {
-//   const scrollY = window.scrollY;
-//   const max = window.innerHeight * 0.35; // hasta donde desaparece
-//   const t = Math.min(scrollY / max, 1); // de 0 a 1
-
-//   // animación suave
-//   const opacity = 1 - t;
-//   const translate = -t * 40; // -40px suave
-
-//   heroSection.style.opacity = opacity;
-//   heroSection.style.transform = `translateY(${translate}px)`;
-// });
-
-//**********************************************************************//
-//**********************************************************************//
-
 // EFECTO CLICK EN BOTONES
 const clickables = document.querySelectorAll(`
-  button:not(.close-modal):not(.gallery-prev):not(.gallery-next):not(.prev-project):not(.next-project):not(.modal-close-top),
+  button:not(.close-modal):not(.gallery-prev):not(.gallery-next):not(.prev-project):not(.next-project):not(.modal-close-top):not(.back-to-top),
   a.btn,
   a.btn-glow,
   .card-open,
   .card-download,
-  .modal-download,
   .contact-btn-902
 `);
 
 clickables.forEach((btn) => {
   btn.addEventListener("click", () => {
     btn.classList.add("btn-click");
-
-    // Lo quitamos cuando termina la animación, para poder repetirla
     setTimeout(() => btn.classList.remove("btn-click"), 250);
   });
 });
 
-// cerrar
 document.addEventListener("click", (e) => {
   const btn = e.target.closest(".close-modal");
   if (!btn) return;
-
   btn.classList.add("clicked");
-
   setTimeout(() => btn.classList.remove("clicked"), 200);
-
   const modal = btn.closest(".project-modal");
   closeModal(modal);
 });
 
-//*******************************************************//
-//*******************************************************//
-// # ENVIO DE FOMLARIO Y CARTEL DE RESPUESTA
-
+// ENVIO DE FORMULARIO
 const form = document.getElementById("contactForm");
 const alerta = document.getElementById("alertaGracias");
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-
   alerta.textContent = "Enviando tu mensaje...";
   alerta.className = "alerta show";
 
   emailjs.sendForm("service_fz2pgho", "template_l9yc0yb", this).then(
     () => {
-      alerta.textContent =
-        "¡Gracias por tu mensaje! Me comunicaré contigo pronto.";
+      alerta.textContent = "¡Gracias por tu mensaje! Me comunicaré contigo pronto.";
       alerta.className = "alerta success show";
       form.reset();
     },
@@ -309,10 +232,7 @@ form.addEventListener("submit", function (e) {
   }, 6000);
 });
 
-//***********************************************//
-//***********************************************//
 // BOTON FOOTER
-
 const backToTop = document.getElementById("backToTop");
 
 window.addEventListener("scroll", () => {
@@ -330,8 +250,6 @@ backToTop.addEventListener("click", () => {
   });
 });
 
-// Alineaciones para el footer
-// posicion del boton = al toggle navar
 function alignBackToTop() {
   const navbar = document.querySelector(".navbar .container");
   const btn = document.getElementById("backToTop");
@@ -339,14 +257,10 @@ function alignBackToTop() {
   if (!navbar || !btn) return;
 
   const rect = navbar.getBoundingClientRect();
-
-  // distancia desde el borde derecho del contenido del navbar y el viewport
   const offset = window.innerWidth - rect.right;
-
-  btn.style.right = offset + 8 + "px"; // 8px pequeño margen
+  btn.style.right = offset + 8 + "px";
 }
 
-// posicion logo = logo ----- NO hace falta porque ya esta ubicado por un conainer
 function alignFooterLogo() {
   const navbarContainer = document.querySelector(".navbar .container");
   const footerLogo = document.getElementById("footerLogo");
@@ -354,11 +268,7 @@ function alignFooterLogo() {
   if (!navbarContainer || !footerLogo) return;
 
   const rect = navbarContainer.getBoundingClientRect();
-
-  // distancia del borde izquierdo del viewport al NAV
   const offsetLeft = rect.left;
-
-  // aplicar la misma distancia al logo del footer
   footerLogo.style.marginLeft = offsetLeft + "px";
 }
 
@@ -372,5 +282,5 @@ window.addEventListener("DOMContentLoaded", () => {
   alignFooterLogo();
 });
 
-//*******************************************************//
-//*******************************************************//
+alignBackToTop();
+alignFooterLogo();
