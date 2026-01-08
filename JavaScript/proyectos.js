@@ -7,7 +7,7 @@ export const proyectos = [
     tipo: "App web",
     framework: "MVC",
     descripcion:
-      "Catálogo de películas con sistema de reseñas, favoritos y calificaciones.",
+      "Catálogo de películas con sistema de reseñas, favoritos, calificaciones y más.",
 
     iconos: [
       `${base}Iconos/csharp.svg`,
@@ -50,6 +50,7 @@ export const proyectos = [
     ],
     imagenes: [
       `${base}Imagenes/MovieApp/home.webp`,
+      `${base}Imagenes/MovieApp/movie.webp`,
       `${base}Imagenes/MovieApp/favoritos.webp`,
       `${base}Imagenes/MovieApp/reseñas.webp`,
       `${base}Imagenes/MovieApp/admin.webp`,

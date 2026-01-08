@@ -113,6 +113,19 @@ proyectos.forEach((p) => {
   if (p.imagenes?.length) {
     img.src = p.imagenes[0];
     img.alt = p.titulo;
+    
+    // Click en imagen para abrir overlay
+    const imageWrapper = card.querySelector(".card-image-wrapper");
+    imageWrapper.style.cursor = "pointer";
+    imageWrapper.addEventListener("click", (e) => {
+      e.preventDefault();
+      // Abrir el overlay con navegación usando el arreglo completo
+      window.dispatchEvent(
+        new CustomEvent("open-overlay", {
+          detail: { images: p.imagenes, index: 0 },
+        })
+      );
+    });
   }
 
   card.querySelector(".card-title").textContent = p.titulo;

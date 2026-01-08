@@ -17,6 +17,7 @@
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .project-card:hover {
@@ -32,6 +33,23 @@
   overflow: hidden;
   background: var(--modal-bg);
   display: block;
+  cursor: pointer;
+}
+
+.card-image-wrapper::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.card-image-wrapper:hover::after {
+  opacity: 0.9;
 }
 
 .card-image {
@@ -143,6 +161,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
+    cursor: pointer;
   transition:
     transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
@@ -287,11 +306,13 @@
 }
 
 .prev-project {
-    left: 0.5rem;
+    /* left: 0.5rem; */
+    left: 3rem;
 }
 
 .next-project {
-    right: 0.5rem;
+    /* right: 0.5rem; */
+    right: 3rem;
 }
 
 .prev-project:active, 
@@ -307,10 +328,8 @@
     background: var(--modal-bg);
     color: var(--modal-text);
 
-    width: min(1110px, 92%);
     width: min(1140px, 92%);
     max-height: 90vh;
-
     padding: 1rem;
     padding-left: 4rem;
     padding-right: 4rem;
@@ -767,7 +786,7 @@
 #image-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.973);
+    background: rgba(0, 0, 0, 0.82);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -790,7 +809,46 @@
     max-width: 85%;
     max-height: 85%;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.13);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.063);
+    filter: brightness(0.9);
+    transition: filter 0.2s ease;
+}
+
+/* Overlay navigation buttons */
+.overlay-prev,
+.overlay-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.16);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    border-radius: 999px;
+    transition: all 0.12s ease;
+    line-height: 1;
+}
+
+.overlay-prev { left: 1.5rem; }
+.overlay-next { right: 1.5rem; }
+
+.overlay-prev:hover,
+.overlay-next:hover {
+    background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-50%) scale(1.04);
+}
+
+.overlay-prev:active,
+.overlay-next:active {
+    transform: translateY(-50%) scale(0.96);
+}
+
+.overlay-prev svg,
+.overlay-next svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
 }
 
 #close-overlay {

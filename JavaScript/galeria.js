@@ -247,12 +247,8 @@ function setupGallery(images) {
       el.loading = "lazy";
 
       el.addEventListener("click", () => {
-        const overlay = document.getElementById("image-overlay");
-        const overlayImage = document.getElementById("overlay-image");
-        if (overlay && overlayImage) {
-          overlayImage.src = src;
-          overlay.classList.remove("hidden");
-        }
+        // Abrir overlay con navegación usando el arreglo completo y el índice actual
+        openOverlay(images, index);
       });
     }
 
@@ -326,6 +322,24 @@ function setupGallery(images) {
 const overlay = document.getElementById("image-overlay");
 const overlayImage = document.getElementById("overlay-image");
 const closeOverlay = document.getElementById("close-overlay");
+const overlayPrev = document.querySelector(".overlay-prev");
+const overlayNext = document.querySelector(".overlay-next");
+
+let overlayImages = [];
+let overlayIndex = 0;
+
+function renderOverlay() {
+  if (!overlayImage || overlayImages.length === 0) return;
+  overlayImage.src = overlayImages[overlayIndex];
+}
+
+function openOverlay(images, startIndex = 0) {
+  if (!overlay) return;
+  overlayImages = Array.isArray(images) ? images.slice() : [];
+  overlayIndex = Math.min(Math.max(startIndex, 0), overlayImages.length - 1);
+  renderOverlay();
+  overlay.classList.remove("hidden");
+}
 
 if (closeOverlay) {
   closeOverlay.addEventListener("click", () => overlay.classList.add("hidden"));
@@ -336,3 +350,45 @@ if (overlay) {
     if (e.target === overlay) overlay.classList.add("hidden");
   });
 }
+
+if (overlayPrev) {
+  overlayPrev.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (overlayImages.length === 0) return;
+    overlayIndex = (overlayIndex - 1 + overlayImages.length) % overlayImages.length;
+    renderOverlay();
+  });
+}
+
+if (overlayNext) {
+  overlayNext.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (overlayImages.length === 0) return;
+    overlayIndex = (overlayIndex + 1) % overlayImages.length;
+    renderOverlay();
+  });
+}
+
+// Navegación con teclado dentro del overlay
+window.addEventListener("keydown", (e) => {
+  if (!overlay || overlay.classList.contains("hidden")) return;
+  if (e.key === "ArrowRight") {
+    if (overlayImages.length > 0) {
+      overlayIndex = (overlayIndex + 1) % overlayImages.length;
+      renderOverlay();
+    }
+  } else if (e.key === "ArrowLeft") {
+    if (overlayImages.length > 0) {
+      overlayIndex = (overlayIndex - 1 + overlayImages.length) % overlayImages.length;
+      renderOverlay();
+    }
+  }
+});
+
+// Permite abrir overlay desde otros módulos (ej. main.js)
+window.addEventListener("open-overlay", (e) => {
+  const detail = e.detail || {};
+  const imgs = detail.images || [];
+  const idx = detail.index || 0;
+  openOverlay(imgs, idx);
+});

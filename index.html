@@ -423,7 +423,17 @@
     <!-- Imagenes "agrandadas" -->
     <div id="image-overlay" class="hidden">
         <span id="close-overlay">&times;</span>
+        <button class="gallery-prev overlay-prev" type="button" aria-label="Imagen anterior">
+            <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
+                <path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
+            </svg>
+        </button>
         <img id="overlay-image" src="" alt="Imagen ampliada" loading="lazy" />
+        <button class="gallery-next overlay-next" type="button" aria-label="Imagen siguiente">
+            <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
+                <path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z" />
+            </svg>
+        </button>
     </div>
 
 
