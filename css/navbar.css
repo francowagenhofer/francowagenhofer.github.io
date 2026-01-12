@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
     position: fixed;
     left: 0;
     top: -30px;
@@ -21,12 +21,44 @@
         background-color 0.25s ease,
         box-shadow 0.25s ease;
 }
+    .navbar.show {
+        top: 0;
+        opacity: 1;
+    } */
 
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translateY(0);
+  width: 100%;
 
-.navbar.show {
-    top: 0;
-    opacity: 1;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+  border-bottom: 1px solid var(--navbar-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  z-index: 100;
+  padding: 0.6rem 0.6rem;
+
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
 }
+
+.navbar.scrolled {
+  background: var(--navbar-bg);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar.hidden {
+  transform: translateY(-110%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ------- */
 
 .navbar .container {
     max-width: 90%;
@@ -34,6 +66,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
+    height: 4.3rem;
 }
 
 .navbar-right {
@@ -43,7 +77,7 @@
 }
 
 .navbar .logo img {
-    height: 30px;
+    height: 26px;
     width: auto;
     display: block;
 
@@ -55,7 +89,7 @@
     list-style: none;
     display: flex;
     gap: 1.3rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 0;
     padding: 0;
 }
@@ -66,9 +100,8 @@
     font-weight: 600;
     transition: color 0.15s ease, background 0.15s ease;
 
-    /* nuevo */
     position: relative;
-    padding: 0.3rem 0.6rem;
+    padding: 0.25rem 0.5rem;
     border-radius: 6px;
 }
 
@@ -193,15 +226,4 @@
     transform: translateX(18px) scale(0.85);
 }
 
-
-
-/* -------------------------------------------------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------------------------------------------------- */
-/* ---------------------------------------------- RESPONSIVE ---------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------------------------------------------------- */
 

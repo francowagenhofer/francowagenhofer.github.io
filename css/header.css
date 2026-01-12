@@ -60,6 +60,12 @@ body.light .blend-title {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+
+}
+
+.hero-buttons .btn {
+    flex: 1;
+    min-width: 155px;
 }
 
 .btn {
@@ -77,6 +83,7 @@ body.light .blend-title {
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
     /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.226); */
+
 }
 
 .btn:hover {
@@ -161,3 +168,54 @@ body.light .blend-title {
 /* -------------------------------------------------------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------------------------------------------------------- */
 
+
+.scroll-indicator {
+    position: fixed;
+
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-color);
+    opacity: 0.6;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: visible;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-indicator svg {
+    width: 26px;
+    height: 26px;
+    stroke: currentColor;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(8px);
+    }
+}
+
+@media (max-width: 768px) {
+  .scroll-indicator {
+    display: none;
+  }
+}

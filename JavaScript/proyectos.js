@@ -26,7 +26,21 @@ export const proyectos = [
 
       <p><strong>Objetivo del proyecto:</strong> Desarrollar una aplicación integral que combine gestión de datos, 
       autenticación segura con ASP.NET Identity, arquitectura MVC y una interfaz moderna y responsive.</p>
-    `,
+    ` 
+    //  `
+    //   <p><strong>App web ASP.NET MVC para gestión completa de películas.</strong> 
+    //   Permite administrar un catálogo de películas con CRUD completo, sistema de reviews con calificaciones de 1 a 5 estrellas, 
+    //   gestión de favoritos personalizada por usuario y autenticación con roles diferenciados (administrador/usuario).</p>
+
+    //   <p><strong>Características principales:</strong> Interfaz moderna y responsive con Bootstrap, filtros dinámicos por género y año, 
+    //   búsqueda avanzada, panel de administración exclusivo para gestión de películas, sistema de reseñas con comentarios y puntuaciones, 
+    //   y validaciones tanto del lado del cliente como del servidor.</p>
+
+    //   <p><strong>Objetivo del proyecto:</strong> Desarrollar una aplicación integral que combine gestión de datos con Entity Framework Core, 
+    //   autenticación segura con ASP.NET Identity, arquitectura MVC con separación de responsabilidades, y una interfaz moderna y responsive 
+    //   que ofrezca una experiencia de usuario completa y fluida.</p>
+    // `
+    ,
     techList: [
       "<strong>Frontend:</strong> Razor Views, HTML, CSS, Bootstrap",
       "<strong>Backend:</strong> C#, ASP.NET MVC (.NET 9)",
@@ -62,7 +76,6 @@ export const proyectos = [
     tipo: "App web",
     framework: "web forms",
     descripcion:
-      // "App web en C# con .NET para gestión de catálogo de artículos.",
       "Plataforma web para administrar y filtrar productos con control de acceso.",
     iconos: [
       `${base}Iconos/csharp.svg`,
@@ -75,14 +88,19 @@ export const proyectos = [
       link: "http://webcatalog.somee.com/",
     },
     modalTexto: `
-            <p><strong>App web en C# con ASP.NET Web Forms para gestión de artículos.</strong> 
-            Permite administrar productos con CRUD completo, filtrar por categorías y gestionar usuarios con roles.</p>
+            <p><strong>App web en C# con ASP.NET Web Forms para gestión completa de artículos.</strong> 
+            Permite administrar un catálogo de productos con CRUD completo, sistema de filtros por categoría y marca, 
+            búsqueda dinámica, y gestión de usuarios con autenticación y roles diferenciados.</p>
 
-            <p><strong>Objetivo del proyecto:</strong> Simular escenarios reales de inventario, aplicando arquitectura en capas,
-            seguridad básica, patrones de diseño y usabilidad.</p>
+            <p><strong>Características principales:</strong> Visualización en grilla y cards, gestión de imágenes, 
+            edición inline de artículos, panel de administración con permisos específicos y validaciones tanto del lado 
+            del cliente como del servidor.</p>
+
+            <p><strong>Objetivo del proyecto:</strong> Simular escenarios reales de inventario aplicando arquitectura en capas, 
+            patrones de diseño, seguridad mediante roles y buenas prácticas de usabilidad. Proyecto deployado y accesible online.</p>
         `,
     techList: [
-      "<strong>Frontend:</strong> Bootstrap",
+      "<strong>Frontend:</strong> HTML, CSS, Bootstrap, JavaScript",
       "<strong>Backend:</strong> C#, ASP.NET Web Forms",
       "<strong>Base de datos:</strong> SQL Server",
       "<strong>IDE:</strong> Visual Studio",
@@ -93,7 +111,7 @@ export const proyectos = [
       "<strong>Arquitectura:</strong> Capas (dominio, negocio, UI)",
       "<strong>Gestión:</strong> CRUD con validaciones",
       "<strong>Consultas:</strong> T-SQL y joins",
-      "<strong>Seguridad:</strong> Roles y login",
+      "<strong>Seguridad:</strong> Sistema de roles y login",
     ],
     repos: [
       {
@@ -115,7 +133,6 @@ export const proyectos = [
     framework: "Winforms",
     descripcion:
       "Gestión integral de empleados, proyectos y salarios para pymes.",
-    // "App de escritorio en C# .NET para gestión integral de una pyme.",
     iconos: [
       `${base}Iconos/csharp.svg`,
       `${base}Iconos/dotnet2.svg`,
@@ -135,16 +152,16 @@ export const proyectos = [
             • SQL Server: completa con multiusuario, procedimientos almacenados, interfaz de consola y WinForms.</p>
         `,
     techList: [
-      "<strong>Backend:</strong> C#",
       "<strong>Frontend:</strong> Windows Forms",
+      "<strong>Backend:</strong> C#",
       "<strong>Base de datos:</strong> SQL Server / SQLite",
       "<strong>IDE:</strong> Visual Studio",
     ],
     methodsList: [
       "<strong>Lógica:</strong> POO",
       "<strong>Arquitectura:</strong> Capas (dominio, negocio, UI)",
-      "<strong>Consultas:</strong> T-SQL, join",
       "<strong>Gestión:</strong> CRUD con validaciones",
+      "<strong>Consultas:</strong> T-SQL y joins",
     ],
     repos: [
       {

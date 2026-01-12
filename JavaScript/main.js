@@ -10,7 +10,7 @@ emailjs.init("uWi6YuvGoxMA-TSfo");
 let currentTheme = "dark";
 const gradientCanvas = document.getElementById("gradient");
 const toggle = document.getElementById("theme-toggle");
-const navbar = document.querySelector(".navbar");
+// const navbar = document.querySelector(".navbar");
 
 let gradient;
 const githubIcons = document.querySelectorAll('[data-icon="github"]');
@@ -88,18 +88,48 @@ function toggleTheme() {
 
 toggle.addEventListener("change", toggleTheme);
 
-let lastMouseY = window.innerHeight;
-function updateNavbar(y) {
-  const triggerZone = window.innerHeight * 0.25;
-  navbar.classList.toggle("show", y < triggerZone);
-}
+// NAVBAR  -------------------------------
 
+// let lastMouseY = window.innerHeight;
+// function updateNavbar(y) {
+//   const triggerZone = window.innerHeight * 0.25;
+//   navbar.classList.toggle("show", y < triggerZone);
+// }
+
+// document.addEventListener("mousemove", (e) => {
+//   lastMouseY = e.clientY;
+//   if (!document.body.classList.contains("modal-open")) {
+//     updateNavbar(lastMouseY);
+//   }
+// });
+
+// NAVBAR - Auto-hide al bajar, reaparece al subir o acercar mouse al tope
+const navbar = document.querySelector(".navbar");
+let lastY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  const currentY = window.scrollY;
+  const goingDown = currentY > lastY;
+  const pastHero = currentY > 40;
+
+  navbar.classList.toggle("scrolled", pastHero);
+  navbar.classList.toggle("hidden", goingDown && pastHero);
+
+  lastY = currentY;
+});
+
+// Mostrar navbar si el mouse está en el 25% superior
 document.addEventListener("mousemove", (e) => {
-  lastMouseY = e.clientY;
   if (!document.body.classList.contains("modal-open")) {
-    updateNavbar(lastMouseY);
+    const triggerZone = window.innerHeight * 0.25;
+    if (e.clientY < triggerZone) {
+      navbar.classList.remove("hidden");
+    }
   }
 });
+// -----------------------------------
+
+
 
 // RENDERIZACION DE PROYECTOS
 const container = document.getElementById("projects-container");
@@ -305,3 +335,29 @@ window.addEventListener("DOMContentLoaded", () => {
 
 alignBackToTop();
 alignFooterLogo();
+
+
+// SCROLL INDICATOR
+const scrollIndicator = document.querySelector(".scroll-indicator");
+if (scrollIndicator) {
+  const projectsSection = document.getElementById("proyectos");
+  
+  window.addEventListener("scroll", () => {
+    if (!projectsSection) return;
+    
+    const projectsRect = projectsSection.getBoundingClientRect();
+    const isProjectsVisible = projectsRect.top < window.innerHeight;
+    const isAtTop = window.scrollY < 50;
+    
+    if (isProjectsVisible && !isAtTop) {
+      scrollIndicator.classList.add("hidden");
+    } else {
+      scrollIndicator.classList.remove("hidden");
+    }
+  });
+  
+  // Click en la flecha para ir a proyectos
+  scrollIndicator.addEventListener("click", () => {
+    projectsSection.scrollIntoView({ behavior: "smooth" });
+  });
+}
