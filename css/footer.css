@@ -69,6 +69,8 @@ footer {
     margin: 0;
     text-align: center;
     white-space: nowrap;
+
+    pointer-events: auto; 
 }
 
 .footer-text:hover {

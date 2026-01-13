@@ -22,6 +22,21 @@ h2 {
 
 }
 
+/* Offset para scroll de navegación */
+#proyectos{
+    scroll-margin-top: 4rem;
+}
+
+.section,
+#skills,
+#about {
+  scroll-margin-top: 7rem;
+}
+
+#contact{
+    scroll-margin-top: 9rem;
+}
+
 /* ·············································· */
 /* SCROLL */
 
@@ -83,13 +98,13 @@ h2 {
 .skill-card {
   background: var(--background-tecn-card);
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 0.5rem;
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 350px;   /* Clave */
+  min-height: 325px;   /* Clave */
 }
 
 .skill-card h3 {
@@ -116,7 +131,6 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
 .skill img,
@@ -176,8 +190,8 @@ h2 {
 .card-front .skills-icons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  width: 100%;
+  gap: 0.5rem;
+  width: 85%;
   justify-items: center;
 }
 
