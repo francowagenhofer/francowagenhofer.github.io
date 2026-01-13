@@ -8,7 +8,6 @@ export const proyectos = [
     framework: "MVC",
     descripcion:
       "Catálogo de películas con sistema de reseñas, favoritos, calificaciones y más.",
-
     iconos: [
       `${base}Iconos/csharp.svg`,
       `${base}Iconos/dotnet2.svg`,
@@ -115,7 +114,7 @@ export const proyectos = [
     ],
     repos: [
       {
-        label: "Repositorio",
+        label: "Ver Repositorio",
         link: "https://github.com/francowagenhofer/tp-final-nivel3-Wagenhofer-Franco.git",
       },
     ],
@@ -132,7 +131,7 @@ export const proyectos = [
     tipo: "App escritorio",
     framework: "Winforms",
     descripcion:
-      "Gestión integral de empleados, proyectos y salarios para pymes.",
+      "Gestión integral de empleados, proyectos y sueldos para PyMEs y mucho más.",
     iconos: [
       `${base}Iconos/csharp.svg`,
       `${base}Iconos/dotnet2.svg`,

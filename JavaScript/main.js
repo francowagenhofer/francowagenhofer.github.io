@@ -4,8 +4,134 @@ import { applyThemeColors } from "./colores.js";
 import { proyectos } from "./proyectos.js";
 import emailjs from "@emailjs/browser";
 import "../css/main.css";
+import { getLanguage, setLanguage, getTranslation } from "./Lenguajes.js";
 
+const proyectosOriginal = JSON.parse(JSON.stringify(proyectos));
 emailjs.init("uWi6YuvGoxMA-TSfo");
+
+// ------------------------------------------------------------
+// LENGUAJES
+
+// Language Dropdown
+const langButton = document.getElementById("lang-button");
+const langMenu = document.getElementById("lang-menu");
+const currentLang = document.getElementById("current-lang");
+const langOptions = document.querySelectorAll(".lang-option");
+
+// Establecer idioma inicial
+let currentLanguage = getLanguage();
+if (currentLang) {
+  currentLang.textContent = currentLanguage.toUpperCase();
+}
+
+// Toggle del menú
+langButton?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  langMenu.classList.toggle("hidden");
+});
+
+// Cambiar idioma
+langOptions.forEach((option) => {
+  option.addEventListener("click", () => {
+    const lang = option.dataset.lang;
+    currentLang.textContent = lang.toUpperCase();
+    langMenu.classList.add("hidden");
+
+    // Aplicar idioma
+    updatePageLanguage(lang);
+  });
+});
+
+// Cerrar al hacer click fuera
+document.addEventListener("click", () => {
+  langMenu?.classList.add("hidden");
+});
+
+// Función para actualizar el idioma de la página
+function updatePageLanguage(lang) {
+  currentLanguage = lang;
+  setLanguage(lang);
+
+  // Actualizar elementos con atributos data-i18n
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    el.textContent = getTranslation(key, lang);
+  });
+
+  // Actualizar placeholders
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    el.placeholder = getTranslation(key, lang);
+  });
+
+  // Actualizar labels
+  document.querySelectorAll("[data-i18n-label]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-label");
+    el.textContent = getTranslation(key, lang);
+  });
+
+  // Traducir proyectos
+  const projectMap = {
+    modal1: "movieapp",
+    modal2: "catalogo",
+    modal3: "gestor",
+  };
+
+  // Actualizar botones y descripciones en el DOM (ambos idiomas)
+  document.querySelectorAll(".card-download").forEach((btn, i) => {
+    btn.textContent = getTranslation(
+      `projects.${Object.values(projectMap)[i]}.button`,
+      lang
+    );
+  });
+  document.querySelectorAll(".card-description").forEach((desc, i) => {
+    desc.textContent = getTranslation(
+      `projects.${Object.values(projectMap)[i]}.desc`,
+      lang
+    );
+  });
+
+  // Restaurar/traducir modalTexto, techList, methodsList
+  if (lang === "es") {
+    proyectos.forEach((p, i) => {
+      p.modalTexto = proyectosOriginal[i].modalTexto;
+      p.techList = proyectosOriginal[i].techList;
+      p.methodsList = proyectosOriginal[i].methodsList;
+    });
+  } else if (lang === "en") {
+    proyectos.forEach((p) => {
+      p.modalTexto = getTranslation(`projects.${projectMap[p.id]}.text`, lang);
+      p.techList = getTranslation(`projects.${projectMap[p.id]}.techList`, lang);
+      p.methodsList = getTranslation(`projects.${projectMap[p.id]}.methodsList`, lang);
+    });
+  }
+
+  // Traducir botones y repos en proyectos (ambos idiomas)
+  proyectos.forEach((p) => {
+    if (p.id === "modal1") {
+      p.boton.texto = getTranslation("projects.movieapp.button", lang);
+    }
+    if (p.id === "modal2") {
+      p.boton.texto = getTranslation("projects.catalogo.button", lang);
+    }
+    if (p.id === "modal3") {
+      p.boton.texto = getTranslation("projects.gestor.button", lang);
+    }
+
+    if (p.id === "modal2" && p.repos?.length) {
+      p.repos[0].label = getTranslation("projects.catalogo.repos", lang);
+    }
+    if (p.id === "modal3" && p.repos?.length) {
+      p.repos[0].label = getTranslation("projects.gestor.repos.sqlite", lang);
+      p.repos[1].label = getTranslation("projects.gestor.repos.sqlserver", lang);
+    }
+  });
+
+  // Actualizar el atributo lang del documento
+  document.documentElement.lang = lang;
+}
+
+// ------------------------------------------------------------
 
 let currentTheme = "dark";
 const gradientCanvas = document.getElementById("gradient");
@@ -33,14 +159,11 @@ function updateFavicon(theme) {
   if (!favicon) return;
 
   favicon.href =
-    theme === "dark"
-      ? "Logos/logo_blanco.webp"
-      : "Logos/logo_negro.webp";
+    theme === "dark" ? "Logos/logo_blanco.webp" : "Logos/logo_negro.webp";
 }
 
 function updateGithubIcons(theme) {
-  const src =
-    theme === "dark" ? "Iconos/GitHub_dark.svg" : "Iconos/github.svg";
+  const src = theme === "dark" ? "Iconos/GitHub_dark.svg" : "Iconos/github.svg";
 
   githubIcons.forEach((img) => (img.src = src));
 }
@@ -121,15 +244,13 @@ window.addEventListener("scroll", () => {
 // Mostrar navbar si el mouse está en el 25% superior
 document.addEventListener("mousemove", (e) => {
   if (!document.body.classList.contains("modal-open")) {
-    const triggerZone = window.innerHeight * 0.25;
+    const triggerZone = window.innerHeight * 0.2;
     if (e.clientY < triggerZone) {
       navbar.classList.remove("hidden");
     }
   }
 });
 // -----------------------------------
-
-
 
 // RENDERIZACION DE PROYECTOS
 const container = document.getElementById("projects-container");
@@ -143,7 +264,7 @@ proyectos.forEach((p) => {
   if (p.imagenes?.length) {
     img.src = p.imagenes[0];
     img.alt = p.titulo;
-    
+
     // Click en imagen para abrir overlay
     const imageWrapper = card.querySelector(".card-image-wrapper");
     imageWrapper.style.cursor = "pointer";
@@ -166,7 +287,7 @@ proyectos.forEach((p) => {
     const badgeText = card.querySelector(".card-badge-tipo .badge-text");
     if (badgeText) badgeText.textContent = p.tipo;
   }
-  
+
   // badge framework
   if (p.framework) {
     const badgeText = card.querySelector(".card-badge-framework .badge-text");
@@ -193,6 +314,11 @@ proyectos.forEach((p) => {
 
   container.appendChild(card);
 });
+
+
+// Aplicar idioma guardado al cargar la página
+updatePageLanguage(currentLanguage);
+
 
 // SCROLL
 const reveals = document.querySelectorAll(
@@ -267,7 +393,8 @@ form.addEventListener("submit", function (e) {
 
   emailjs.sendForm("service_fz2pgho", "template_l9yc0yb", this).then(
     () => {
-      alerta.textContent = "¡Gracias por tu mensaje! Me comunicaré contigo pronto.";
+      alerta.textContent =
+        "¡Gracias por tu mensaje! Me comunicaré contigo pronto.";
       alerta.className = "alerta success show";
       form.reset();
     },
@@ -336,28 +463,28 @@ window.addEventListener("DOMContentLoaded", () => {
 alignBackToTop();
 alignFooterLogo();
 
-
 // SCROLL INDICATOR
 const scrollIndicator = document.querySelector(".scroll-indicator");
 if (scrollIndicator) {
   const projectsSection = document.getElementById("proyectos");
-  
+
   window.addEventListener("scroll", () => {
     if (!projectsSection) return;
-    
+
     const projectsRect = projectsSection.getBoundingClientRect();
     const isProjectsVisible = projectsRect.top < window.innerHeight;
     const isAtTop = window.scrollY < 50;
-    
+
     if (isProjectsVisible && !isAtTop) {
       scrollIndicator.classList.add("hidden");
     } else {
       scrollIndicator.classList.remove("hidden");
     }
   });
-  
+
   // Click en la flecha para ir a proyectos
   scrollIndicator.addEventListener("click", () => {
     projectsSection.scrollIntoView({ behavior: "smooth" });
   });
 }
+

@@ -21,6 +21,7 @@ a[href="https://neat.firecms.co"] {
 
   /* Navbar */
   --navbar-bg: rgba(12, 12, 14, 0.57);
+  --navbar-bg-fuerte: rgba(12, 12, 14, 0.829);
   --navbar-border: rgba(168, 168, 168, 0.06);
   --navbar-link-hover: #8fe6f4ff;
 

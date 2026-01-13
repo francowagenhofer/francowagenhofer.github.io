@@ -38,12 +38,32 @@
             </a>
             <div class="navbar-right">
                 <ul class="nav-links">
-                    <li><a href="#proyectos">Proyectos</a></li>
-                    <li><a href="#skills">Tecnologías</a></li>
-                    <li><a href="#about">Sobre mí</a></li>
-                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#proyectos" data-i18n="nav.proyectos">Proyectos</a></li>
+                    <li><a href="#skills" data-i18n="nav.tecnologias">Tecnologías</a></li>
+                    <li><a href="#about" data-i18n="nav.sobre">Sobre mí</a></li>
+                    <li><a href="#contact" data-i18n="nav.contacto">Contacto</a></li>
                 </ul>
+
+                |
+
                 <div class="wrapper">
+                    <div class="language-switcher">
+                        <button id="lang-button" class="lang-button" aria-label="Seleccionar idioma">
+                            <span id="current-lang">ES</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="lang-icon">
+                                <path
+                                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" fill-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <div id="lang-menu" class="lang-menu hidden">
+                            <button class="lang-option" data-lang="es">Español</button>
+                            <button class="lang-option" data-lang="en">English</button>
+                        </div>
+                    </div>
+
+                    <!-- Theme Toggle -->
                     <input type="checkbox" id="theme-toggle" />
                     <label for="theme-toggle" class="toggle" aria-label="Cambiar tema">
                         <span class="toggle-ball"></span>
@@ -55,18 +75,21 @@
 
     <header id="home" class="hero-section feature">
         <h1 class="blend-title">Franco Wagenhöfer</h1>
-        <p class="subtitle">Desarrollador .NET | Aplicaciones web, desktop y manejo de datos</p>
+        <p class="subtitle" data-i18n="header.subtitle">Desarrollador .NET | Aplicaciones web, desktop y manejo de datos
+        </p>
         <div class="hero-buttons">
-            <a href="/CV/cv-franco-wagenhofer.pdf" download class="btn btn-primary btn-glow" >Descargar CV</a>
+            <a href="/CV/cv-franco-wagenhofer.pdf" download class="btn btn-primary btn-glow"
+                data-i18n="header.cv">Descargar CV</a>
             <a href="https://linkedin.com/in/franco-wagenhöfer" target="_blank" rel="noopener noreferrer"
-                class="btn btn-secondary btn-glow">LinkedIn</a>
+                class="btn btn-secondary btn-glow" data-i18n="header.linkedin">LinkedIn</a>
             <a href="https://github.com/francowagenhofer" target="_blank" rel="noopener noreferrer"
-                class="btn btn-secondary btn-glow">GitHub</a>
+                class="btn btn-secondary btn-glow" data-i18n="header.github">GitHub</a>
         </div>
     </header>
 
     <div class="scroll-indicator">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
     </div>
@@ -74,7 +97,7 @@
     <main class="container">
 
         <section id="proyectos" class="section">
-            <h2>Proyectos destacados</h2>
+            <h2 data-i18n="projects.title">Proyectos destacados</h2>
             <div id="projects-container" class="projects-grid"></div>
 
             <template id="project-template">
@@ -84,18 +107,16 @@
                     </a>
                     <div class="card-content">
                         <div class="card-badges">
-                            <!-- Badge destacado (fijo) -->
                             <span class="card-badge">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                 </svg>
-                                Destacado
+                                <span data-i18n="projects.featured">Destacado</span>
                             </span>
-                            <!-- Badge tipo (dinámico) -->
                             <span class="card-badge card-badge-tipo">
                                 <span class="badge-text"></span>
                             </span>
-                            <!-- Badge framework (dinámico) -->
                             <span class="card-badge card-badge-framework">
                                 <span class="badge-text"></span>
                             </span>
@@ -110,7 +131,7 @@
                         </div>
                         <div class="card-actions">
                             <a class="btn card-btn btn-primary card-download" download></a>
-                            <button type="button" class="btn card-btn btn-secondary open-modal" data-id="">Ver más</button>
+                            <button type="button" class="btn card-btn btn-secondary open-modal" data-id="" data-i18n="projects.viewMore">Ver más</button>
                         </div>
                     </div>
                 </article>
@@ -121,12 +142,12 @@
         <!-- Habilidades -->
         <section id="skills" class="section">
 
-            <h2 class="skills-title">Tecnologías & Herramientas</h2>
-            <p class="skills-intro">Lo que manejo y aplico en mis proyectos</p>
+            <h2 class="skills-title" data-i18n="skills.title">Tecnologías & Herramientas</h2>
+            <p class="skills-intro" data-i18n="skills.intro">Lo que manejo y aplico en mis proyectos</p>
 
             <div class="skills-grid-cards">
                 <article class="skill-card card">
-                    <h3>Backend</h3>
+                    <h3 data-i18n="skills.backend">Backend</h3>
                     <div class="card-inner">
                         <div class="card-front">
                             <div class="skills-icons">
@@ -168,7 +189,7 @@
                 </article>
 
                 <article class="skill-card card">
-                    <h3>Frontend</h3>
+                    <h3 data-i18n="skills.frontend">Frontend</h3>
                     <div class="card-inner">
 
                         <div class="card-front">
@@ -214,7 +235,7 @@
                 </article>
 
                 <article class="skill-card card">
-                    <h3>Herramientas</h3>
+                    <h3 data-i18n="skills.tools">Herramientas</h3>
                     <div class="card-inner">
 
                         <div class="card-front">
@@ -224,11 +245,8 @@
                                     <span>Git</span>
                                 </div>
                                 <div class="skill iconos">
-
-                                    <!-- <img src="/Public/Iconos/GitHub_dark.svg" alt="" /> -->
                                     <img src="/Iconos/GitHub_dark.svg" alt="GitHub" class="icon" loading="lazy"
                                         data-icon="github" />
-
                                     <span>GitHub</span>
                                 </div>
                                 <div class="skill iconos">
@@ -247,11 +265,9 @@
                                 <li><img src="/Iconos/git.svg" class="icon-small" alt=""> Control de versiones
                                 </li>
                                 <li>
-                                    <!-- <img src="/Public/Iconos/GitHub_dark.svg" class="icon-small" alt=""> -->
                                     <img src="/Iconos/GitHub_dark.svg" alt="GitHub" class="icon-small" loading="lazy"
                                         data-icon="github" />
-                                    Repositorios
-                                    remotos
+                                    Repositorios remotos
                                 </li>
                                 <li><img src="/Iconos/visual-studio.svg" class="icon-small" alt=""> IDE para .NET
                                 </li>
@@ -268,12 +284,12 @@
 
         <!-- Sobre mi -->
         <section id="about" class="section">
-            <h2>Sobre mí</h2>
-            <p class="about-text">
+            <h2 data-i18n="about.title">Sobre mí</h2>
+            <p class="about-text" data-i18n="about.text1">
                 Soy desarrollador .NET con formación en la Tecnicatura Universitaria en Programación (UTN),
                 fortalecida con práctica constante y proyectos reales en C# .NET y SQL Server.
             </p><br>
-            <p class="about-text">
+            <p class="about-text" data-i18n="about.text2">
                 Me apasiona el desarrollo de software y busco seguir creciendo profesionalmente, ampliando mis
                 capacidades técnicas y aportando valor en cada desafío.
             </p>
@@ -281,30 +297,30 @@
 
         <!-- Contacto -->
         <section id="contact" class="contact-section">
-            <h2>Contacto</h2>
+            <h2 data-i18n="contact.title">Contacto</h2>
             <div class="contact-container">
 
                 <form id="contactForm" class="contact-form">
 
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" name="name" placeholder="Tu nombre" required autocomplete="name" />
+                    <label for="name" data-i18n="contact.name">Nombre</label>
+                    <input type="text" id="name" name="name" data-i18n-placeholder="contact.namePlaceholder" placeholder="Tu nombre" required autocomplete="name" />
 
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="Tu email" required autocomplete="email" />
+                    <label for="email" data-i18n="contact.email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="Tu email" required autocomplete="email" />
 
-                    <label for="phone">Teléfono (opcional)</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Tu número" autocomplete="tel" />
+                    <label for="phone" data-i18n="contact.phone">Teléfono (opcional)</label>
+                    <input type="tel" id="phone" name="phone" data-i18n-placeholder="contact.phonePlaceholder" placeholder="Tu número" autocomplete="tel" />
 
-                    <label for="message">Mensaje</label>
-                    <textarea id="message" name="message" rows="6" placeholder="Escribe tu mensaje" required></textarea>
+                    <label for="message" data-i18n="contact.message">Mensaje</label>
+                    <textarea id="message" name="message" rows="6" data-i18n-placeholder="contact.messagePlaceholder" placeholder="Escribe tu mensaje" required></textarea>
 
-                    <button type="submit" class="contact-btn-902 btn-icon-send">Enviar</button>
+                    <button type="submit" class="contact-btn-902 btn-icon-send" data-i18n="contact.send">Enviar</button>
                 </form>
 
                 <div id="alertaGracias" class="alerta"></div>
 
                 <div class="contact-info">
-                    <h3>Mis datos</h3>
+                    <h3 data-i18n="contact.myData">Mis datos</h3>
                     <ul class="contact-list">
                         <li class="contact-link">
                             <img src="/Iconos/gmail.svg" alt="" class="icon" loading="lazy" aria-hidden="true" />
@@ -325,12 +341,8 @@
                             </a>
                         </li>
                         <li class="contact-link">
-
-                            <!-- <img src="/Public/Iconos/GitHub_dark.svg" alt="" class="icon" loading="lazy"
-                                aria-hidden="true" /> -->
                             <img src="/Iconos/GitHub_dark.svg" alt="GitHub" class="icon" loading="lazy"
                                 aria-hidden="true" data-icon="github" />
-
                             <a href="https://github.com/francowagenhofer" alt="GitHub" target="_blank"
                                 rel="noopener noreferrer">
                                 github.com/francowagenhofer
@@ -338,7 +350,7 @@
                         </li>
                     </ul>
 
-                    <a href="/CV/cv-franco-wagenhofer.pdf" class="contact-btn-902 btn-icon-download" download>
+                    <a href="/CV/cv-franco-wagenhofer.pdf" class="contact-btn-902 btn-icon-download" download data-i18n="contact.downloadCV">
                         Descargar CV
                     </a>
                 </div>
@@ -354,7 +366,7 @@
                 <img src="Logos/logo_transparente_negro.webp" id="footerLogo" alt="Logo FW">
             </div>
             <p class="footer-text">
-                <span class="footer-original">
+                <span class="footer-original" data-i18n="footer.text">
                     © 2025 • Franco Wagenhöfer —
                     Vite.js ·
                     <a href="https://neat.firecms.co/" target="_blank" class="neat-gradient">Neat Gradient</a> ·
@@ -384,7 +396,7 @@
             <h3 class="modal-title"></h3>
             <div class="modal-body modal-grid">
                 <div class="modal-block gallery-block">
-                    <h4>Imagenes</h4>
+                    <h4 data-i18n="modal.images">Imagenes</h4>
                     <div class="modal-gallery">
                         <div class="modal-gallery-slider"></div>
                         <div class="gallery-controls">
@@ -405,16 +417,16 @@
                     </div>
                 </div>
                 <div class="modal-block description-block">
-                    <h4>Descripción</h4>
+                    <h4 data-i18n="modal.description">Descripción</h4>
                     <p class="modal-text"></p>
                     <p class="modal-text2"></p>
                 </div>
                 <div class="modal-block tech-block">
-                    <h4>Tecnologías</h4>
+                    <h4 data-i18n="modal.technologies">Tecnologías</h4>
                     <ul class="tech-list"></ul>
                 </div>
                 <div class="modal-block methods-block">
-                    <h4>Métodos</h4>
+                    <h4 data-i18n="modal.methods">Métodos</h4>
                     <ul class="methods-list"></ul>
                 </div>
             </div>
@@ -430,13 +442,15 @@
         <span id="close-overlay">&times;</span>
         <button class="gallery-prev overlay-prev" type="button" aria-label="Imagen anterior">
             <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
-                <path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
+                <path
+                    d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
             </svg>
         </button>
         <img id="overlay-image" src="" alt="Imagen ampliada" loading="lazy" />
         <button class="gallery-next overlay-next" type="button" aria-label="Imagen siguiente">
             <svg height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor">
-                <path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z" />
+                <path
+                    d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z" />
             </svg>
         </button>
     </div>

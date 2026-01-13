@@ -12,6 +12,7 @@ export function applyThemeColors(theme) {
 
     // --- Navbar ---
     root.style.setProperty("--navbar-bg", "rgba(192, 165, 149, 0.16)");
+    root.style.setProperty("--navbar-bg-fuerte", "rgba(228, 228, 228, 1)");
     root.style.setProperty("--navbar-border", "rgba(77, 77, 77, 0.07)");
 
     root.style.setProperty("--navbar-link-hover", "#B77A14");
@@ -116,6 +117,7 @@ export function applyThemeColors(theme) {
 
     // navbar y fondo
     // root.style.setProperty("--navbar-bg", "rgba(16, 18, 21, 0.49)");
+    root.style.setProperty("--navbar-bg-fuerte", "rgba(12, 12, 14, 1)");
     root.style.setProperty("--navbar-bg", "rgba(12, 12, 14, 0.57)");
     root.style.setProperty("--navbar-text-color", "white");
     root.style.setProperty("--navbar-border", "rgba(168, 168, 168, 0.06)");
